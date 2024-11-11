@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  Pending
+  Approved
+  Canceled
+}
+
+model Appointment {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  dateTime  DateTime
+  comments  String?
+  status    Status   @default(Pending)
+  createdAt DateTime @default(now())
+}
